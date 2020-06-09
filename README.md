@@ -1,7 +1,3 @@
-```@meta
-EditURL = "<unknown>/../TaoNet/doc/README.jl"
-```
-
 # TaoNet
 
 This module currently implements a simulation algorithm for a simple Markov model of the evolution of *gene family syntenic networks*. It simulates the synteny graph (sensu Zhao & Schranz 2018) in stages across a given a dated species tree using a Gillespie-like algorithm. The continuous time Markov model includes the following events:
@@ -31,15 +27,14 @@ You might also want to `add Plots`
 ## Example
 Note that `Plots` can take a long time to load...
 
-```@example README
+```julia
 using NewickTree, TaoNet, Plots, Random, Distributions
 Random.seed!(195);
-nothing #hide
 ```
 
 Get the species tree
 
-```@example README
+```julia
 t = readnw("(((atr:2.47,(osa:1.82,vvi:1.82):0.65):0.91,(gbi:2.90,"*
     "(gmo:1.77,wmi:1.77):1.13):0.48):0.80,(afi:0.89,scu:0.89):3.31);")
 ```
@@ -49,7 +44,7 @@ t = readnw("(((atr:2.47,(osa:1.82,vvi:1.82):0.65):0.91,(gbi:2.90,"*
 
 Now define the model
 
-```@example README
+```julia
 tn = SimpleTaoNet(λ=0.2, μ=0.15, ν=0.05, pr=Beta(1,5), pd=Beta(1,5))
 ```
 ```
@@ -66,7 +61,7 @@ SimpleTaoNet{Float64,TaoNet.ShiftedGeometric{Float64}}
 
 and simulate a random syntenic network
 
-```@example README
+```julia
 G = rand(tn, t)
 ```
 ```
@@ -75,14 +70,14 @@ G = rand(tn, t)
 
 and we can plot it, this might take some time to load
 
-```@example README
+```julia
 taonetplot(G, t; curves=false)
 ```
 ![](1681295473.png)
 
 Now the interesting stuff will mostly be to simulate genome-scale profiles
 
-```@example README
+```julia
 Gs = rand(tn, t, 10)
 profile_df = profile(Gs, t)
 ```
@@ -105,7 +100,7 @@ profile_df = profile(Gs, t)
 
 This profile is however not directly related to the kind of profiles Tao makes. Tao's profiles are based on clustering the MCScanX based network. I think the equivalent of Tao's clusters in the simulated networks would be to simply take all connected components from the simulated gene family networks. This is implemented with the following function
 
-```@example README
+```julia
 clusters_df = cluster_profile(Gs, t)
 ```
 ```
@@ -134,7 +129,7 @@ clusters_df = cluster_profile(Gs, t)
 
 which can be easily 'binarized'
 
-```@example README
+```julia
 binary_df = clusters_df .> 0
 ```
 ```
@@ -165,7 +160,7 @@ which can be used for phylogenetic analysis.
 
 Note that a condition can be given to `rand` to only retain simulated graphs that satisfy the condition, for instance having more than one edge. The default condition is having at least one edge and more than one node, which looks like this
 
-```@example README
+```julia
 using LightGraphs
 Gs = rand(tn, t, 10, condition=(G)->nv(G) > 1 && ne(G) > 0)
 ```
@@ -186,3 +181,4 @@ Gs = rand(tn, t, 10, condition=(G)->nv(G) > 1 && ne(G) > 0)
 ---
 
 *This page was generated using [Literate.jl](https://github.com/fredrikekre/Literate.jl).*
+

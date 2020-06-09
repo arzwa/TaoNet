@@ -59,4 +59,4 @@ using LightGraphs
 Gs = rand(tn, t, 10, condition=(G)->nv(G) > 1 && ne(G) > 0)
 
 using Literate  #src
-Literate.markdown(@__FILE__, joinpath(@__DIR__, ".."), execute=true)  #src
+Literate.markdown(@__FILE__, joinpath(@__DIR__, ".."), execute=true, documenter=false)  #src
