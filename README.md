@@ -11,7 +11,7 @@ Two more parameters are defined in the simple model:
 1. the probability an edge of a node is retained upon rearrangement `pr`
 2. the probability an edge of a parent node is copied to a duplicated node `pd`
 
-In the present implementation, the latter two parameters are not set directly, but assigned a Beta prior distribution from which $p_r$ and $p_d$ are randomly sampled independently for each event.
+In the present implementation, the latter two parameters are not set directly, but assigned a Beta prior distribution from which `pr` and `pd` are randomly sampled independently for each event.
 
 ## Usage
 
@@ -181,3 +181,4 @@ Gs = rand(tn, t, 10, condition=(G)->nv(G) > 1 && ne(G) > 0)
 ---
 
 *This page was generated using [Literate.jl](https://github.com/fredrikekre/Literate.jl).*
+
