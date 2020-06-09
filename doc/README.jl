@@ -2,14 +2,14 @@
 
 # This module currently implements a simulation algorithm for a simple Markov model of the evolution of *gene family syntenic networks*. It simulates the synteny graph (sensu Zhao & Schranz 2018) in stages across a given a dated species tree using a Gillespie-like algorithm. The continuous time Markov model includes the following events:
 
-# (1) gene duplication at *per-gene* duplication rate $\lambda$
-# (2) gene loss at *per gene* loss rate $\mu$
-# (3) rearrangement at *per gene* rearrangement rate $\nu$
+# 1. gene duplication at *per-gene* duplication rate `λ`
+# 2. gene loss at *per gene* loss rate `μ`
+# 3. rearrangement at *per gene* rearrangement rate `ν`
 
 # Two more parameters are defined in the simple model:
 
-# (1) the probability an edge of a node is retained upon rearrangement $p_r$
-# (2) the probability an edge of a parent node is copied to a duplicated node $p_d$
+# 1. the probability an edge of a node is retained upon rearrangement `pr`
+# 2. the probability an edge of a parent node is copied to a duplicated node `pd`
 
 # In the present implementation, the latter two parameters are not set directly, but assigned a Beta prior distribution from which $p_r$ and $p_d$ are randomly sampled independently for each event.
 
