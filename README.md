@@ -156,7 +156,7 @@ binary_df = clusters_df .> 0
 │ 17  │ 1    │ 0    │ 0    │ 1    │ 0    │ 0    │ 0    │ 0    │
 ```
 
-which can be used for phylogenetic analysis.
+which can be used for phylogenetic analysis. To do phylogenetic analysis, I guess it's convenient to have a multifasta format? Not sure, but it's implemented use `to_fasta("output_file_name", binary_df)`.
 
 Note that a condition can be given to `rand` to only retain simulated graphs that satisfy the condition, for instance having more than one edge. The default condition is having at least one edge and more than one node, which looks like this
 

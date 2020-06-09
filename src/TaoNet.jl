@@ -3,7 +3,7 @@ module TaoNet
 using NewickTree, Parameters, Distributions
 using LightGraphs, MetaGraphs, GraphRecipes
 using StatsBase, ColorSchemes, DataFrames
-export SimpleTaoNet, cluster_profile, profile, taonetplot
+export SimpleTaoNet, cluster_profile, profile, taonetplot, to_fasta
 
 # A simpler implementation of the TaoNet, without branch-specific rates etc.
 # (more involved but outdated version in `TaoNets.jl`)
@@ -199,6 +199,13 @@ function taonetplot(G, tree; cs = ColorSchemes.Spectral_11,
     graphplot(G, markercolor=mc, names=ns, linecolor=linecolor,
         linealpha=linealpha, dim=dim, nodeshape=nodeshape;
         markersize=markersize, kwargs...)
+end
+
+to_fasta(fn::String, df::DataFrame) = open(fn, "w") do f; to_fasta(f, df); end
+function to_fasta(io::IO, df::DataFrame)
+    for n in names(df)
+        write(io, ">$n\n$(join(Int.(df[!,n])))\n")
+    end
 end
 
 end # module
