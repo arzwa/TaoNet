@@ -15,7 +15,7 @@
 
 # ## Usage
 
-# This is a julia package, and was deveoped using julia 1.4. To install the package open a julia REPL (type `julia` in a terminal window), then enter the package manager by typing `]` and execute the following lines
+# This is a julia package, and was developed using julia 1.4. To install the package open a julia REPL (type `julia` in a terminal window), then enter the package manager by typing `]` and execute the following lines
 #
 # ```
 # add https://github.com/arzwa/NewickTree.jl#master
@@ -52,7 +52,7 @@ clusters_df = cluster_profile(Gs, t)
 # which can be easily 'binarized'
 binary_df = clusters_df .> 0
 
-# which can be used for phylogenetic analysis. To do phylogenetic analysis, I guess it's convenient to have a multifasta format? Not sure, but it's implemented use `to_fasta("output_file_name", binary_df)`.
+# which can be used for phylogenetic analysis. To do phylogenetic analysis, I guess it's convenient to have the matrix in more 'phylogenetic' output formats? Not sure, but it's implemented: use `to_fasta("output_file_name", binary_df)` or `to_phylip("output_file_name", binary_df)`.
 
 # Note that a condition can be given to `rand` to only retain simulated graphs that satisfy the condition, for instance having more than one edge. The default condition is having at least one edge and more than one node, which looks like this
 using LightGraphs

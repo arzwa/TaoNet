@@ -3,7 +3,7 @@ module TaoNet
 using NewickTree, Parameters, Distributions
 using LightGraphs, MetaGraphs, GraphRecipes
 using StatsBase, ColorSchemes, DataFrames
-export SimpleTaoNet, cluster_profile, profile, taonetplot, to_fasta
+export SimpleTaoNet, cluster_profile, profile, taonetplot, to_fasta, to_phylip
 
 # A simpler implementation of the TaoNet, without branch-specific rates etc.
 # (more involved but outdated version in `TaoNets.jl`)
@@ -205,6 +205,14 @@ to_fasta(fn::String, df::DataFrame) = open(fn, "w") do f; to_fasta(f, df); end
 function to_fasta(io::IO, df::DataFrame)
     for n in names(df)
         write(io, ">$n\n$(join(Int.(df[!,n])))\n")
+    end
+end
+
+to_phylip(fn::String, df::DataFrame) = open(fn,"w") do f; to_phylip(f,df); end
+function to_phylip(io::IO, df::DataFrame)
+    write(io, "$(nrow(df)) $(ncol(df))\n")
+    for n in names(df)
+        write(io, "$n $(join(Int.(df[!,n])))\n")
     end
 end
 
