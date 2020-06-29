@@ -210,7 +210,7 @@ end
 
 to_phylip(fn::String, df::DataFrame) = open(fn,"w") do f; to_phylip(f,df); end
 function to_phylip(io::IO, df::DataFrame)
-    write(io, "$(nrow(df)) $(ncol(df))\n")
+    write(io, "$(ncol(df)) $(nrow(df))\n")
     for n in names(df)
         write(io, "$n $(join(Int.(df[!,n])))\n")
     end

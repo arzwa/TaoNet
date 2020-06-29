@@ -4,9 +4,12 @@ authors = ["arzwa <arzwa@psb.vib.ugent.be>"]
 version = "0.1.0"
 
 [deps]
+ApproxBayes = "f5f396d3-230c-5e07-80e6-9fadf06146cc"
+CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
 ColorSchemes = "35d6a980-a343-548e-a6ea-1d62b119f2f4"
 DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
+GpABC = "e850a1a4-d859-11e8-3d54-a195e6d045d3"
 GraphRecipes = "bd48cda9-67a9-57be-86fa-5b3c104eda73"
 LightGraphs = "093fc24a-ae57-5d10-9952-331d41423f4d"
 MetaGraphs = "626554b9-1ddb-594c-aa3c-2596fe9399a5"
