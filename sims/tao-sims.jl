@@ -1,13 +1,12 @@
-# using Pkg; Pkg.activate("/home/arzwa/dev/TaoNet")
+using Pkg; Pkg.activate("/home/arzwa/dev/TaoNet")
 using NewickTree, TaoNet, CSV, Distributions, StatsBase, UUIDs, DataFrames
 
 # configuration ----------------------------------------------------------------
 treefile   = joinpath(@__DIR__, "data/monocots2.nw")  # reference species tree
 outputfile = joinpath(@__DIR__, "results.csv")  # output file path
 tmpdir     = "/tmp/taonet-test"; mkpath(tmpdir)  # working directory
-nrep       = 100   # nr. of replicates to simulate
+nrep       = 10    # nr. of replicates to simulate
 nfamilies  = 1000  # nr. of families to simulate per replicate (!= # clusters)
-iqtreecmd  = "-m MK+R+FO -st MORPH"  # iqtree options (without -s part)
 plambda    = Uniform(0., 1.)   # distribution from which to sample λ
 pnu        = Uniform(0., 1.)   # distribution from which to sample ν
 pbeta      = Uniform(1, 10)    # distribution from which to sample β
@@ -36,7 +35,7 @@ end
 StatsBase.params(p::SimpleTaoNet) = (λ=p.λ, μ=p.μ, ν=p.ν, αr=p.pr.α,
     βr=p.pr.β, αd=p.pd.α, βd=p.pd.β, η=p.root.p, q=p.q)
 
-const iqtfiles = ["ckp.gz", "log", "mldist", "model.gz", "treefile", "iqtree",
+const iqtfiles = ["ckp.gz", "log", "mldist", "treefile", "iqtree",
     "parstree", "bionj", "treefile.rfdist", "treefile.log"]
 
 function unroot(tree)
@@ -57,7 +56,7 @@ function dosims(speciestree, prior, nfamilies, nrep)
     map(1:nrep) do i
         # draw a random parameter set (model parameterization)
         model = rand(prior)
-        @info i param/s(model)
+        @info i params(model)
 
         # simulate the synteny network and obtain the matrix
         graphs   = rand(model, speciestree, nfamilies)
@@ -66,7 +65,7 @@ function dosims(speciestree, prior, nfamilies, nrep)
         tmpfile  = joinpath(tmpdir, string(uuid4()) * ".phy")
 
         to_phylip(tmpfile, binarydf)
-        cmd = `iqtree -s $tmpfile $iqtreecmd`
+        cmd = `iqtree -s $tmpfile -m MK+R+FO -st MORPH`
         run(cmd)
         nwtree = readline("$tmpfile.treefile")
         run(`iqtree -t $tmpfile.treefile -rf $tmptrefile`)
