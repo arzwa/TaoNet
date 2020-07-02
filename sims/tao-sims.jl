@@ -7,10 +7,10 @@ outputfile = joinpath(@__DIR__, "results.csv")  # output file path
 tmpdir     = "/tmp/taonet-test"; mkpath(tmpdir)  # working directory
 nrep       = 10    # nr. of replicates to simulate
 nfamilies  = 1000  # nr. of families to simulate per replicate (!= # clusters)
-plambda    = Uniform(0., 1.)   # distribution from which to sample λ
-pnu        = Uniform(0., 1.)   # distribution from which to sample ν
+plambda    = Uniform(0., 3.)   # distribution from which to sample λ
+pnu        = Uniform(0., 3.)   # distribution from which to sample ν
 pbeta      = Uniform(1, 10)    # distribution from which to sample β
-peta       = Beta(20, 10)      # distribution from which to sample η
+peta       = Beta(6, 3)      # distribution from which to sample η
 # NOTE: if you want to set a constant value for λ, μ, ... just use a Normal
 # distribution with zero variance, e.g. if you want to fix λ at 0.1 use
 # `pλ = Normal(0.1, 0.)`
