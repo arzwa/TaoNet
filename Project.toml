@@ -1,7 +1,7 @@
 name = "TaoNet"
 uuid = "05f67ef8-8c46-4ddb-bb97-04eff07daa08"
 authors = ["arzwa <arzwa@psb.vib.ugent.be>"]
-version = "0.1.0"
+version = "0.1.1"
 
 [deps]
 ApproxBayes = "f5f396d3-230c-5e07-80e6-9fadf06146cc"
