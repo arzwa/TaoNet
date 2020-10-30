@@ -89,10 +89,11 @@ CSV.write(joinpath(@__DIR__, outputfile), df)
 # Example of the kind of model we're simulating from
 M, x = randmodel(100);
 
-p1 = plot(LogNormal(log(0.38), 0.5), grid=false, label="prior")
+p1 = plot(LogNormal(log(0.38), 0.5), grid=false, label="prior", title="genome-wide rates")
 vline!([x.λ], label="average λ across families")
 vline!([x.ν], label="average μ across families")
-p2 = scatter([tn.λ for tn in M], [tn.ν for tn in M])
-p3 = histogram([tn.λ for tn in M], bins=50)
-p4 = histogram([tn.ν for tn in M], bins=50)
-plot(p1, p2, p3, p4, grid=false)
+p2 = scatter([tn.λ for tn in M], [tn.ν for tn in M], legend=false, xlabel="λ", ylabel="ν", title="family-specific rates")
+p3 = histogram([tn.λ for tn in M], bins=50, legend=false, xlabel="λ", title="family-specific λ")
+p4 = histogram([tn.ν for tn in M], bins=50, legend=false, xlabel="ν", title="family-specific ν")
+plot(p1, p2, p3, p4, grid=false, titlefont=8, title_loc=:left, fg_legend=:transparent)
+savefig("exsim.pdf")
